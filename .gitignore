@@ -24,3 +24,5 @@ CPU.runs/synth_1/runme.log
 CPU.runs/synth_1/runme.sh
 CPU.runs/synth_1/vivado.jou
 CPU.runs/synth_1/vivado.pb
+vivado.jou
+vivado.log

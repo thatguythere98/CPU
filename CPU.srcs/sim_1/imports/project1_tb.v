@@ -6,7 +6,7 @@ module proj1_tb;
   wire [15:0]memd;
 
 
-  proj1 dut(clk, rst, memrw, memaddr, memd);
+  cpu dut(clk, rst, memrw, memaddr, memd);
 
   always
     #5  clk =  !clk;
