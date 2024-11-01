@@ -24,8 +24,3 @@ module proj1_tb;
   end
 
 endmodule
-
-
-
-
-

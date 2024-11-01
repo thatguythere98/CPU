@@ -34,14 +34,14 @@ module ctr (
   output reg MemRW;
   output reg ld;
 
-  parameter op_add=8'b001;//0x01  ADD
-  parameter op_xor= 8'b010;//0x02  XOR
-  parameter op_jump=8'b011;//0x3 JUMP
-  parameter op_jumpz=8'b100;//0x4 JUMPZ
-  parameter op_store=8'b101;//0x5 STORE
-  parameter op_load=8'b110;//0x6 LOAD
-  parameter op_mull=8'b1001;//0x09 MULL
-  parameter op_neg=8'b1010;//0x0A Neg
+  parameter op_add=8'b00000001;//0x01  ADD
+  parameter op_xor= 8'b00000010;//0x02  XOR
+  parameter op_jump=8'b00000011;//0x3 JUMP
+  parameter op_jumpz=8'b00000100;//0x4 JUMPZ
+  parameter op_store=8'b00000101;//0x5 STORE
+  parameter op_load=8'b00000110;//0x6 LOAD
+  parameter op_mull=8'b00001001;//0x9 MULL
+  parameter op_neg=8'b00001010;//0xA Neg
 
   parameter Fetch_1=4'b0000;
   parameter Fetch_2= 4'b0001;
@@ -73,7 +73,7 @@ module ctr (
 
   //inputs and next state machine
   always @(*)
-  begin //change to just current_state in sensitivity list
+  begin
     case(current_state)
       Fetch_1:
       begin
@@ -192,7 +192,7 @@ module ctr (
       end
       default:
         next_state <= Fetch_1;
-    endcase // current_state
+    endcase
   end
 
   //outputs state machine
@@ -208,7 +208,7 @@ module ctr (
       loadACC <= 0;
       loadMDR <= 0;
       loadIR <= 0;
-      opALU <= 0;
+      opALU <= 2'b00;
       MemRW <= 0;
       ld <= 0;
     end
@@ -225,7 +225,7 @@ module ctr (
           loadACC <= 0;
           loadMDR <= 0;
           loadIR <= 0;
-          opALU <= 0;
+          opALU <= 2'b00;
           MemRW <= 0;
           ld <= 0;
         end
@@ -239,7 +239,7 @@ module ctr (
           loadACC <= 0;
           loadMDR <= 1;
           loadIR <= 0;
-          opALU <= 0;
+          opALU <= 2'b00;
           MemRW <= 0;
           ld <= 0;
         end
@@ -253,7 +253,7 @@ module ctr (
           loadACC <= 0;
           loadMDR <= 0;
           loadIR <= 1;
-          opALU <= 0;
+          opALU <= 2'b00;
           MemRW <= 0;
           ld <= 0;
         end
@@ -267,7 +267,7 @@ module ctr (
           loadACC <= 0;
           loadMDR <= 0;
           loadIR <= 0;
-          opALU <= 0;
+          opALU <= 2'b00;
           MemRW <= 0;
           ld <= 0;
         end
@@ -281,7 +281,7 @@ module ctr (
           loadACC <= 0;
           loadMDR <= 1;
           loadIR <= 0;
-          opALU <= 0;
+          opALU <= 2'b00;
           MemRW <= 0;
           ld <= 0;
         end
@@ -295,7 +295,7 @@ module ctr (
           loadACC <= 1;
           loadMDR <= 0;
           loadIR <= 0;
-          opALU <= 2'd1;
+          opALU <= 2'b01;
           MemRW <= 0;
           ld <= 0;
         end
@@ -309,7 +309,7 @@ module ctr (
           loadACC <= 0;
           loadMDR <= 1;
           loadIR <= 0;
-          opALU <= 0;
+          opALU <= 2'b00;
           MemRW <= 0;
           ld <= 0;
         end
@@ -323,7 +323,7 @@ module ctr (
           loadACC <= 1;
           loadMDR <= 0;
           loadIR <= 0;
-          opALU <= 0;
+          opALU <= 2'b00;
           MemRW <= 0;
           ld <= 0;
         end
@@ -337,7 +337,7 @@ module ctr (
           loadACC <= 0;
           loadMDR <= 1;
           loadIR <= 0;
-          opALU <= 0;
+          opALU <= 2'b00;
           MemRW <= 0;
           ld <= 0;
         end
@@ -351,7 +351,7 @@ module ctr (
           loadACC <= 1;
           loadMDR <= 0;
           loadIR <= 0;
-          opALU <= 0;
+          opALU <= 2'b00;
           MemRW <= 0;
           ld <= 0;
         end
@@ -365,7 +365,7 @@ module ctr (
           loadACC <= 0;
           loadMDR <= 0;
           loadIR <= 0;
-          opALU <= 0;
+          opALU <= 2'b00;
           MemRW <= 1;
           ld <= 0;
         end
@@ -379,7 +379,7 @@ module ctr (
           loadACC <= 0;
           loadMDR <= 0;
           loadIR <= 0;
-          opALU <= 0;
+          opALU <= 2'b00;
           MemRW <= 0;
           ld <= 0;
         end
@@ -393,7 +393,7 @@ module ctr (
           loadACC <= 1;
           loadMDR <= 0;
           loadIR <= 0;
-          opALU <= 2'd3;
+          opALU <= 2'b11;
           MemRW <= 0;
           ld <= 0;
         end
@@ -407,7 +407,7 @@ module ctr (
           loadACC <= 0;
           loadMDR <= 1;
           loadIR <= 0;
-          opALU <= 0;
+          opALU <= 2'b10;
           MemRW <= 0;
           ld <= 1;
         end
@@ -421,7 +421,7 @@ module ctr (
           loadACC <= 0;
           loadMDR <= 0;
           loadIR <= 0;
-          opALU <= 2'd2;
+          opALU <= 2'b10;
           MemRW <= 0;
           ld <= 0;
         end
@@ -435,7 +435,7 @@ module ctr (
           loadACC <= 1;
           loadMDR <= 0;
           loadIR <= 0;
-          opALU <= 2'd2;
+          opALU <= 2'b10;
           MemRW <= 0;
           ld <= 0;
         end
@@ -449,12 +449,11 @@ module ctr (
           loadACC <= 0;
           loadMDR <= 0;
           loadIR <= 0;
-          opALU <= 0;
+          opALU <= 2'b00;
           MemRW <= 0;
           ld <= 0;
         end
       endcase
     end
   end
-
 endmodule

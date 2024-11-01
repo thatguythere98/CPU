@@ -11,10 +11,7 @@ module  ram(
 
   output reg  [15:0]q;  //Q => 16 bit data output
 
-
   reg [15:0] mem [255:0]; // memory
-
-
 
   always @(*)
   begin

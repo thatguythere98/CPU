@@ -8,17 +8,14 @@ module alu(clk, rst, A, B, ld, opALU, done, Rout );
   input wire [1:0]opALU;
 
   output done;
-
   output reg [15:0]Rout;
 
   wire [15:0] O;
-
 
   multiplier U4 (A[7:0], B[7:0], rst, clk, ld, done, O);
 
   always @(*)
   begin
-
     case (opALU)
       2'b00  :
         Rout = A^B;// xor
@@ -32,5 +29,4 @@ module alu(clk, rst, A, B, ld, opALU, done, Rout );
         Rout = 16'd0;
     endcase
   end
-
 endmodule

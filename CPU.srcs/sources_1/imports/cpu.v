@@ -32,8 +32,7 @@ module cpu(
   wire done;
   wire ld;
 
-
-
+  
   ram U1(we, memd, memq, memaddr);//one instance of memory
 
   ctr U2(clk, rst, zflag, opcode, done, muxpc, muxmar, muxacc, loadmar, loadpc, loadacc, loadmdr, loadir, opalu, we, ld);//one instance of controller
